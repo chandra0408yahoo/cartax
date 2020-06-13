@@ -47,10 +47,7 @@ public class homepagestepdefs extends util {
     }
 
 
-    @And("^Read Inputfile and extract the Car Registration numbers$")
-    public void readInputfileAndExtractTheCarRegistrationNumbers() {
-        homepage_method.ireadInputFileandExtractCarReg();
-    }
+
 
     @When("^I enter each car registration number$")
     public void iEnterEachCarRegistrationNumber() {
@@ -64,4 +61,8 @@ public class homepagestepdefs extends util {
     }
 
 
+    @And("^Read Inputfile and extract the Car Registration numbers and compare results$")
+    public void readInputfileAndExtractTheCarRegistrationNumbersAndCompareResults() {
+        homepage_method.ireadInputFileandExtractCarReg();
+    }
 }

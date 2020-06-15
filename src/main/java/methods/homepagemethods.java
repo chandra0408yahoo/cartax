@@ -5,9 +5,13 @@ import Utilities.FirstConfigFile;
 import Utilities.ListFiles;
 import Utilities.util;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import sun.rmi.server.MarshalOutputStream;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,14 +47,13 @@ public class homepagemethods extends util {
     @FindBy(css = "#m > div > div:nth-child(3) > div.jsx-2530913122 > div > span > div.jsx-3529878979 > dl:nth-child(5) > dd")
     public WebElement carYear;
 
-    @FindBy(xpath = "//span[contains(text(),'Vehicle Not Found')]")
-    public WebElement error;
 
 
-    public void ireadInputFileandExtractCarReg() {
+
+    public void ireadInputFileandExtractCarReg() throws IOException {
 
         List<String> v = LF.readalllocalfiles();
-
+ArrayList<String>ar= new ArrayList<>();
 
         List<String> allRegValues = filterCarRegfromfile(v);
         try {
@@ -60,9 +63,21 @@ public class homepagemethods extends util {
                 System.out.println(x);
                 enterCarRegNumber(x);
 
-                compareSearchResults(x);
+         Boolean decidingfactor= isElementPresent(By.xpath("//a[@class='jsx-3366286007 dual']"));
 
-                getDriver().navigate().back();
+
+
+                if(decidingfactor){
+                  ar.add(x+"failed<<<<<<<<<<<");
+                    getDriver().navigate().back();
+                }else{
+                    compareSearchResults(x);
+                    ar.add(x+"Passed<<<<<<<<<<<");
+                    getDriver().navigate().back();
+                }
+
+
+
             }
 
 
@@ -70,11 +85,19 @@ public class homepagemethods extends util {
             e.printStackTrace();
 
         }
+        LF.writeoutputfile(ar);
+        System.out.println(ar);
+    }
+    public boolean isElementPresent(By locator) {
+        try {
+            getDriver().findElement(locator);
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
 
 
     }
-
-
     public void enterCarRegNumber(String c) {
 
 
@@ -110,7 +133,6 @@ public class homepagemethods extends util {
     }
 
 
-//[DN09HRM, KT17DLX, SG18HTN]
 
 
 }

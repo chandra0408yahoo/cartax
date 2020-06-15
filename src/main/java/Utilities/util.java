@@ -95,8 +95,8 @@ public class util extends webconnector {
     }
     public List<String> filterCarRegfromfile(List<String> allLines) {
 
-        List<String> words = new ArrayList<>();
-        List<String> words1 = new ArrayList<>();
+        List<String> regnumbers = new ArrayList<>();
+        List<String> newregnumbers = new ArrayList<>();
         String joined2 = String.join(",", allLines);
 
 
@@ -104,23 +104,23 @@ public class util extends webconnector {
 
         Matcher matcher = pattern.matcher(joined2);
         while (matcher.find()) {
-            words.add(matcher.group());
+            regnumbers.add(matcher.group());
         }
+        System.out.println(regnumbers+"OUTPUTOFWORDS");
 
-
-        words.stream()
+        regnumbers.stream()
                 .forEach(i -> {
                     if (i.contains(" ")) {
-                        words1.add(i.replaceAll(" ", ""));
+                        newregnumbers.add(i.replaceAll(" ", ""));
 
                     } else {
-                        words1.add(i);
+                        newregnumbers.add(i);
                     }
                 });
 
-        System.out.println(words1);
+        System.out.println(newregnumbers);
 
-        return words1;
+        return newregnumbers;
 
 
     }

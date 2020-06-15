@@ -61,8 +61,8 @@ public class homepagestepdefs extends util {
     }
 
 
-    @And("^Read Inputfile and extract the Car Registration numbers and compare results$")
-    public void readInputfileAndExtractTheCarRegistrationNumbersAndCompareResults() {
+    @Given("^Read Inputfile and extract the Car Registration numbers and compare results$")
+    public void readInputfileAndExtractTheCarRegistrationNumbersAndCompareResults() throws IOException {
         homepage_method.ireadInputFileandExtractCarReg();
     }
 }
